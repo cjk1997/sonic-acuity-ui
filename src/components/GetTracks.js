@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AddTrack from './AddTrack';
+import DeleteTrack from './DeleteTrack';
 
 class GetTracks extends Component {
     constructor(props) {
@@ -22,7 +24,7 @@ class GetTracks extends Component {
     render() {
         const DisplayTracks = this.state.tracks.map(track => {
             return (
-                <div>
+                <div key={track._id}>
                     <ul>
                         <li>
                             {track._id}<br /><br />
@@ -32,6 +34,7 @@ class GetTracks extends Component {
                             Genre: {track.genre}<br />
                             Year Released: {track.year_released}<br />
                             Function: {track.description}<br /><br /><br />
+                            <DeleteTrack id={track._id}/>
                         </li>
                     </ul>
                 </div>
@@ -40,9 +43,12 @@ class GetTracks extends Component {
 
         return (
             <div>
-                {DisplayTracks}
+                { DisplayTracks }
                 <div>
                     <button onClick={this.getTracks}>Refresh Database</button>
+                </div>
+                <div className="addTrack">
+                    <AddTrack/>
                 </div>
             </div>
         );
