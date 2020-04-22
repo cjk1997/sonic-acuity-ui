@@ -7,14 +7,16 @@ class GetTracks extends Component {
         super(props);
         this.state = {
             tracks: [],
-            id: ''
         };
     };
 
     getTracks = () => {
-        fetch('http://localhost:5500/api/tracks')
+        const url = process.env.REACT_APP_API_URL;
+        console.log(url)
+        fetch(`${url}`)
             .then(response => response.json())
-            .then(data => this.setState({tracks: data}));
+            .then(data => this.setState({ tracks: data }))
+            .catch(err => err);
     };
 
     componentDidMount() {
@@ -45,9 +47,10 @@ class GetTracks extends Component {
             <div>
                 { DisplayTracks }
                 <div>
-                    <button onClick={this.getTracks}>Refresh Database</button>
+                    <button onClick={this.getTracks}>Refresh Database</button><br/><br/>
                 </div>
                 <div className="addTrack">
+                    <h3>Add to the collection:</h3>
                     <AddTrack/>
                 </div>
             </div>
